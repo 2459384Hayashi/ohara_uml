@@ -1,0 +1,14 @@
+@startuml 
+left to right direction
+actor ユーザ as U1
+
+rectangle RoboDog as ROB {
+  usecase "名前を変更する" as UC1
+  usecase "時刻に応じた挨拶をする" as UC2
+  usecase "足し算をする" as UC3
+}
+
+U1 --> UC1
+U1 --> UC2
+U1 --> UC3
+@enduml

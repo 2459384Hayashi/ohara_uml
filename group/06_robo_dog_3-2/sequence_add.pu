@@ -1,0 +1,38 @@
+@startuml
+hide footbox
+
+actor       ユーザ       as A
+boundary    システムメニュー画面    as B1 #LightGreen
+boundary    足し算入力画面    as B2 #LightGreen
+boundary    足し算結果画面    as B3 #LightGreen
+control     足し算登録     as C1 #Red
+control     足し算表示     as C2 #Red
+entity      RoboDog      as E #LightBlue
+
+A -> B1: 「足し算」を選択()
+activate B1
+
+B1 -> B2: 表示()
+deactivate B1
+activate B2
+deactivate B1
+B2 -> A: 入力画面遷移()
+deactivate B2
+activate A
+A -> C1: 2つの整数を入力()
+deactivate A
+activate C1
+deactivate B2
+C1 -> E: 2つの整数を登録()
+deactivate C1
+activate E
+
+E --> C2: 登録完了()
+deactivate E
+activate C2
+C2 -> E: 足し算結果を表示()
+deactivate C2
+activate E
+E -> B3: 足し算結果表示画面()
+activate B3
+@enduml
