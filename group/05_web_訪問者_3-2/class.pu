@@ -1,0 +1,24 @@
+@startuml Web訪問者システムのクラス図
+skinparam classAttributeIconSize 0
+hide circle
+
+class Web訪問者 {
+ -訪問者
+ -ユーザID
+ -パスワード
+ -名前
+ -学校名
+ -所属名
+ -メールアドレス
+ -電話番号
+ -年齢
+
+ +登録する()
+ +参照する()
+ +変更する()
+ +削除する()
+ +ログインする()
+ +ログアウトする()
+}
+
+@enduml
