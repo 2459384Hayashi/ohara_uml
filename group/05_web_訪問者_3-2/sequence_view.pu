@@ -5,11 +5,12 @@ skinparam controlBackgroundColor  #F8CECC
 skinparam entityBackgroundColor   #DAE8FC
 
 actor ユーザー as A
-boundary システムメニュー画面 as B1
-boundary 訪問者一覧画面 as B2
-control 参照画面表示 as C1
-control 訪問者の情報を取得 as C2
-entity 訪問者オブジェクト as E
+boundary 訪問者システムメニュー as B1
+boundary 参照画面 as B2
+boundary 参照の画面表示 as B3
+control 参照を表示 as C1
+control ユーザーの情報を表示 as C2
+entity Web訪問者システム as E
 
 A -> B1: 「訪問者情報一覧」を選択()
 activate B1
@@ -21,15 +22,18 @@ C1 -> E: 情報取得()
 deactivate C1
 activate E
 
-opt 情報の有無でエラー発生
-    C2 -> B2: エラーメッセージ表示()
+opt 情報の有無やシステムの不具合でエラー発生
+    E -> B2: エラーメッセージ表示()
 end
 
 E --> C2:
 deactivate E
 activate C2
-C2 -> B2: 訪問者一覧表示()
+C2 -> B3: 貰った情報を設定
 deactivate C2
+activate B3
+B3 -> B2: 参照画面表示()
+deactivate B3
 deactivate B1
 activate B2
 
