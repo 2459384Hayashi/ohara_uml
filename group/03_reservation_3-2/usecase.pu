@@ -1,0 +1,21 @@
+@startuml 
+left to right direction
+actor ユーザ as U1
+
+rectangle Reservation as Res {
+  usecase "ログイン" as UC1
+  usecase "ログアウト" as UC2
+  usecase "予約済み会議室表示" as UC3
+  usecase "新しい予約の作成" as UC4
+  usecase "予約のキャンセル" as UC5
+  usecase "予約の変更" as UC6
+}
+
+U1 --> UC1
+U1 --> UC2
+U1 --> UC3
+U1 --> UC4
+U1 --> UC5
+U1 --> UC6
+
+@enduml

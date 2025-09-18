@@ -1,0 +1,104 @@
+<mxfile host="65bd71144e">
+    <diagram id="ptR1wipOxREM_rEnTgPt" name="ページ1">
+        <mxGraphModel dx="668" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="ユーザー" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="190" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="ログイン&lt;br&gt;ボタン" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#B3FF66;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="110" width="100" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" style="edgeStyle=none;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.01;entryY=0.514;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="2" target="6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="会議室予約システムのログインを選択" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="120" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="11" target="39" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="表示する" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#FF6666;" parent="1" vertex="1">
+                    <mxGeometry x="390" y="170" width="70" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="ログイン情報&lt;br&gt;入力画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#B3FF66;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="280" width="100" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" style="edgeStyle=none;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.035;entryY=0.526;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="2" target="13" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="ユーザーIDを入力" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="250" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" style="edgeStyle=none;html=1;entryX=0;entryY=0.625;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="6" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" style="edgeStyle=none;html=1;entryX=1;entryY=0.375;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="11" target="13" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="データベース" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#9999FF;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="305" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="21" target="20" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" style="edgeStyle=none;html=1;entryX=1.025;entryY=0.379;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="21" target="27" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="310" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" style="edgeStyle=none;html=1;entryX=1.007;entryY=0.449;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="21" target="32" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="270" y="520" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="入力値で&lt;br&gt;ログインが&lt;br&gt;できるか" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;fillColor=#FF6666;" parent="1" vertex="1">
+                    <mxGeometry x="360" y="300" width="80" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" style="edgeStyle=none;html=1;entryX=0.046;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="13" target="21" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="成功" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="390" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="ログイン完了画面の表示" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#B3FF66;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="390" width="100" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="ユーザーID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="455" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="通信エラー&lt;br&gt;画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#B3FF66;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="570" width="100" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="入力エラー&lt;br&gt;画面" style="shape=umlBoundary;whiteSpace=wrap;html=1;fillColor=#B3FF66;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="480" width="100" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="" style="endArrow=none;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="400" y="610" as="sourcePoint"/>
+                        <mxPoint x="400" y="390" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="36" value="" style="endArrow=classic;html=1;entryX=1.025;entryY=0.467;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="31" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="400" y="610" as="sourcePoint"/>
+                        <mxPoint x="450" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="37" value="通信エラー発生時" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="570" width="110" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="ユーザーのデバイスの履歴" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;fillColor=#9999FF;" parent="1" vertex="1">
+                    <mxGeometry x="530" y="170" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" style="edgeStyle=none;html=1;entryX=0.714;entryY=0.031;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="39" target="27" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="ログイン履歴がある場合、入力せずログイン" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="260" width="150" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -1,0 +1,40 @@
+@startuml 会議室予約システム - シーケンス図
+hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor ユーザー as A
+boundary システムメニュー as B1
+boundary 日付入力画面 as B2
+boundary 会議室情報表示画面 as B3
+control 日付入力画面表示 as C1
+control 会議室情報表示 as C2
+entity 会議室予約システム as E
+
+A -> B1: 「参照」を選択()
+activate B1
+
+B1 -> C1: 起動()
+deactivate B1
+activate C1
+C1 -> E: 情報取得()
+activate E
+E --> C1
+C1 -> B2:表示()
+deactivate C1
+activate B2
+
+A -> B2:日付入力()
+B2 -> C2:情報設定()
+deactivate B2
+activate C2
+C2 -> E:情報取得()
+E --> C2
+C2 -> B3:会議室予約情報表示()
+deactivate C2
+activate B3
+
+
+
+@enduml
