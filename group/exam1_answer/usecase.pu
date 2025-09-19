@@ -1,0 +1,21 @@
+@startuml 図書館ユースケース図
+left to right direction
+
+actor 事務職員 as Staff
+
+rectangle 図書館システム {
+    usecase "図書予約" as UC1
+    usecase "予約キャンセル" as UC2
+    usecase "図書貸出" as UC3
+    usecase "図書返却" as UC4
+    usecase "履歴閲覧" as UC5
+}
+
+' 事務職員の操作
+Staff --> UC1
+Staff --> UC2
+Staff --> UC3
+Staff --> UC4
+Staff --> UC5
+
+@enduml
