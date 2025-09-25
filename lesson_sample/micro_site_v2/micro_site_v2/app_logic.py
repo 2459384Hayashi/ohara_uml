@@ -44,38 +44,7 @@ def get_my_greeting() -> str:
             return data.get("good_night")
     except (json.JSONDecodeError, OSError):
         return ""
-    
-def set_first_value(num1) -> int:
-    """num1をJSONに保存"""
-    with open(ROBODOG_FILE, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    data['first_value'] = num1
-    with open(ROBODOG_FILE, 'w', encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
 
-def get_first_value() -> str:
-    """JSONからnum1を読み出す。なければ空文字"""
-    try:
-        with open(ROBODOG_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return data.get("first_value", "")
-    except (json.JSONDecodeError, OSError):
-        return ""
-    
-def set_second_value(num2) -> int:
-    """num2をJSONに保存"""
-    with open(ROBODOG_FILE, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    data['second_value'] = num2
-    with open(ROBODOG_FILE, 'w', encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-def get_second_value() -> str:
-    """JSONからnum2を読み出す。なければ空文字"""
-    try:
-        with open(ROBODOG_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return data.get("second_value", "")
-    except (json.JSONDecodeError, OSError):
-        return ""
-
+# set_first_value: first_valueをjsonに保存
+# set_second_value: second_valueをjsonに保存
+# get_addition: jsonから値を取ってきて、足し算した結果を返却
