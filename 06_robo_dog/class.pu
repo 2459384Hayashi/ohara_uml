@@ -4,6 +4,7 @@ hide circle
 
 class RoboDog {
  -myName: String
+ 'datatime? bigInt?=UNIXTime
  -myTime: int
  -goodMorning: String
  -goodAfternoon: String
@@ -13,7 +14,7 @@ class RoboDog {
  '教科書にはない
  -result: int
 
-'返り値
+'返り値: void → 何も値を返さない
  +getMyName(): String
  +setNewName(): int
  +setNewTime(): void
