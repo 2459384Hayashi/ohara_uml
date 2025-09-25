@@ -66,6 +66,6 @@ def get_addition() -> int:
     with open(ROBODOG_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    addition = data['first_value'] + data['second_value']
+    addition = (data['first_value'] or 0) + (data['second_value'] or 0)
 
     return addition
