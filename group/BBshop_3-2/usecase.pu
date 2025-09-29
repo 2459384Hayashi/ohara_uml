@@ -1,0 +1,24 @@
+@startuml 
+left to right direction
+actor ユーザ as U1
+
+rectangle BB as BB {
+  usecase "" as UC1
+  usecase "" as UC2
+  usecase "" as UC3
+  usecase "" as UC4
+  usecase "" as UC5
+  usecase "" as UC6
+  usecase "" as UC7
+  usecase "" as UC8
+}
+
+U1 --> UC1
+U1 --> UC2
+U1 --> UC3
+U1 --> UC4
+U1 --> UC5
+U1 --> UC6
+U1 --> UC7
+U1 --> UC8
+@enduml
