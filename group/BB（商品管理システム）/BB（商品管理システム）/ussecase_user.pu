@@ -1,0 +1,54 @@
+@startuml 
+left to right direction
+actor ユーザー as U1
+
+rectangle BBshop as BB {
+
+rectangle User as U {
+  usecase "登録する" as UC1
+  usecase "参照する" as UC2
+  usecase "更新する" as UC3
+  usecase "削除する" as UC4
+  usecase "支払い情報を登録する" as UC5
+  usecase "支払い情報を更新する" as UC6
+}
+
+rectangle Cart as C {
+  usecase "商品を追加する" as UC7
+  usecase "商品を削除する" as UC8
+  usecase "数量を変更する" as UC9
+  usecase "カートを参照する" as UC10
+  usecase "小計を計算する" as UC11
+} 
+
+
+rectangle Order as O {
+    usecase "注文を作成する" as UC12
+    usecase "注文を参照する" as UC13
+    usecase "注文を更新する" as UC14
+    usecase "注文をキャンセルする" as UC15
+}
+
+
+
+}
+
+U1 --> UC1
+U1 --> UC2
+U1 --> UC3
+U1 --> UC4
+U1 --> UC5
+U1 --> UC6
+U1 --> UC7
+U1 --> UC8
+U1 --> UC9
+U1 --> UC10
+U1 --> UC11
+U1 --> UC12
+U1 --> UC13
+U1 --> UC14
+U1 --> UC15
+
+' C <-- I
+
+@enduml
