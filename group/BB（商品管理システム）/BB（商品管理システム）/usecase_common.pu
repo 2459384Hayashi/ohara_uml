@@ -1,0 +1,106 @@
+@startuml ユースケース図_共通システム
+left to right direction
+
+actor ユーザー as User
+actor 管理者 as Admin
+actor カード会社 as CardCom
+
+rectangle 共通システム_商品 {
+    usecase "商品情報を参照する" as UC1
+    usecase "商品情報を登録する" as UC2
+    usecase "商品情報を更新する" as UC3
+    usecase "商品情報を削除する" as UC4
+    usecase "在庫を更新する" as UC5
+}
+
+User --> UC1
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+Admin --> UC4
+Admin --> UC5
+
+rectangle 共通システム_注文 {
+    usecase "注文を作成する" as UC6
+    usecase "注文を参照する" as UC7
+    usecase "注文を更新する" as UC8
+    usecase "注文をキャンセルする" as UC9
+}
+
+User --> UC6
+User --> UC7
+User --> UC8
+User --> UC9
+
+Admin --> UC7
+
+rectangle 共通システム_注文詳細 {
+    usecase "注文詳細を参照する" as UC10
+    usecase "注文詳細を登録する" as UC11
+    usecase "注文詳細を更新する" as UC12
+}
+
+User --> UC10
+
+Admin --> UC10
+Admin --> UC11
+Admin --> UC12
+
+rectangle 共通システム_発送 {
+    usecase "発送情報を登録する" as UC13
+    usecase "発送情報を参照する" as UC14
+    usecase "発送状況を更新する" as UC15
+}
+
+User --> UC14
+
+Admin --> UC13
+Admin --> UC14
+Admin --> UC15
+
+rectangle 共通システム_配送業者 {
+    usecase "配送状況を参照する" as UC16
+    usecase "配送予定を登録する" as UC17
+    usecase "配送予定を更新する" as UC18
+}
+
+User --> UC16
+
+Admin --> UC16
+Admin --> UC17
+Admin --> UC18
+
+rectangle 共通システム_返品 {
+    usecase "返品を申請する" as UC19
+    usecase "返品状況を更新する" as UC20
+    usecase "返品理由を登録する" as UC21
+    usecase "返品を承認する" as UC22
+    usecase "返品を却下する" as UC23
+}
+
+User --> UC19
+User --> UC21
+
+Admin --> UC20
+Admin --> UC22
+Admin --> UC23
+
+
+
+rectangle 共通システム_返金 {
+    usecase "返金を申請する" as UC24
+    usecase "返金状況を更新する" as UC25
+    usecase "返金を承認する" as UC26
+    usecase "返金を実行する" as UC27
+    usecase "返金方法を指定する" as UC28
+}
+
+Admin --> UC24
+Admin --> UC25
+Admin --> UC28
+
+CardCom --> UC26
+CardCom --> UC27
+
+@enduml

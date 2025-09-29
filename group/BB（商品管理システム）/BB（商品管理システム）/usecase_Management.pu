@@ -1,0 +1,16 @@
+@startuml 商品管理システムユースケース図
+left to right direction
+
+actor 管理者
+
+rectangle "管理システム" {
+ usecase "ユーザー情報を管理する" as UC1
+ usecase "決済履歴を参照する" as UC2
+ usecase "管理履歴を記録・参照する" as UC3
+}
+
+管理者 --> UC1
+管理者 --> UC2
+管理者 --> UC3
+
+@enduml
