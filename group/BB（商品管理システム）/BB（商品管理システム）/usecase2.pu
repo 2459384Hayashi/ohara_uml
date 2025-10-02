@@ -1,0 +1,107 @@
+@startuml 
+left to right direction
+actor ユーザー as U1
+actor 管理者 as Admin
+actor カード会社 as CardCom
+
+' ----------------------------------------------------
+' ユーザー領域
+' アカウント、カート、注文、返品申請など、ユーザーが直接行う操作
+rectangle ユーザーの操作 {
+  ' アカウント操作
+  usecase "アカウントを登録する" as UC1
+  usecase "自身の情報を参照する" as UC2_U
+  usecase "アカウント情報を更新する" as UC3
+  usecase "アカウントを削除する" as UC4
+  usecase "支払い情報を登録・更新する" as UC5_6
+  
+  ' カート操作
+  usecase "商品を追加する" as UC7
+  usecase "商品を削除する" as UC8
+  usecase "数量を変更する" as UC9
+  usecase "カートを参照する" as UC10
+  usecase "カートを更新する" as UC55
+  usecase "小計を計算する" as UC11
+  
+  ' 注文・参照操作
+  usecase "商品情報を参照する" as UC23_U
+  usecase "注文を作成する" as UC28
+  usecase "自身の注文を参照する" as UC29_U
+  usecase "注文を更新・キャンセルする" as UC30_31
+  usecase "自身の注文詳細を参照する" as UC36_U
+  usecase "自身の発送情報を参照する" as UC40_U
+  usecase "自身の配送状況を参照する" as UC42_U
+  
+  ' 返品操作
+  usecase "返品を申請・理由登録する" as UC45_47
+}
+
+U1 --> UC1
+U1 --> UC2_U
+U1 --> UC3
+U1 --> UC4
+U1 --> UC5_6
+U1 --> UC7
+U1 --> UC8
+U1 --> UC9
+U1 --> UC10
+U1 --> UC55
+U1 --> UC11
+U1 --> UC23_U
+U1 --> UC28
+U1 --> UC29_U
+U1 --> UC30_31
+U1 --> UC36_U
+U1 --> UC40_U 
+U1 --> UC42_U 
+U1 --> UC45_47 
+
+
+' ----------------------------------------------------
+' 管理者領域
+' 管理者自身の情報管理、システム内の全データ管理、承認作業
+rectangle 管理者の操作 {
+  ' 管理者情報・履歴
+  usecase "管理者情報を参照・更新する" as UC17_18
+  usecase "管理履歴を参照する" as UC19
+  usecase "決済履歴を管理する" as UC20_22
+  
+  ' システム・商品管理
+  usecase "商品情報を管理する" as UC24_26
+  usecase "在庫を更新する" as UC27
+  
+  ' 注文・発送管理
+  usecase "全注文を参照する" as UC29_A 
+  usecase "注文詳細を管理する" as UC37_38
+  usecase "発送情報を管理する" as UC39_41
+  usecase "全体配送状況を参照する" as UC42_A
+  usecase "配送予定を管理する" as UC43_44
+  
+  ' 返品・返金管理
+  usecase "返品を承認・却下する" as UC48_49
+  usecase "返品状況を更新する" as UC46_A
+  usecase "返金処理を申請・指示する" as UC50
+  usecase "返金状況を更新・方法指定する" as UC51_54
+  usecase "カード会社へ承認を依頼する" as UC52
+  usecase "カード会社が返金を実行する" as UC53
+}
+
+Admin --> UC17_18
+Admin --> UC19
+Admin --> UC20_22
+Admin --> UC24_26
+Admin --> UC27
+Admin --> UC29_A 
+Admin --> UC37_38
+Admin --> UC39_41 
+Admin --> UC42_A
+Admin --> UC43_44
+Admin --> UC48_49
+Admin --> UC46_A
+Admin --> UC50 
+Admin --> UC51_54
+
+UC52 <.. CardCom : <<uses>>
+UC53 <.. CardCom : <<uses>>
+
+@enduml

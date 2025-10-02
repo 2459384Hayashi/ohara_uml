@@ -1,0 +1,60 @@
+@startuml 注文管理システム-購入・注文シーケンス図
+hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+' 定義されたオブジェクト (データフロー図に基づく)
+actor ユーザー as User
+boundary 注文画面 as OrderScreen
+control 購入処理 as PurchaseProcess
+control エラー as ErrorHandler 
+entity 注文DB as OrderDB
+entity 在庫DB as InventoryDB
+entity クレジットカードシステム as CreditCardSystem 
+
+' 1. ユーザーが注文を確定
+User -> OrderScreen: 注文データ入力/確認
+activate OrderScreen
+
+' 2. 注文を処理へ
+OrderScreen -> PurchaseProcess: 注文を送信
+deactivate OrderScreen
+activate PurchaseProcess
+
+' 3. 支払いリクエスト
+PurchaseProcess -> CreditCardSystem: リクエスト(決済情報)
+activate CreditCardSystem
+CreditCardSystem --> PurchaseProcess: 決済成功/確認応答
+deactivate CreditCardSystem
+
+' 4. 在庫の更新
+PurchaseProcess -> InventoryDB: 在庫更新
+activate InventoryDB
+InventoryDB --> PurchaseProcess: 更新完了
+deactivate InventoryDB
+
+' 5. 注文データの登録
+PurchaseProcess -> OrderDB: 注文データ登録
+activate OrderDB
+OrderDB --> PurchaseProcess: 登録完了
+deactivate OrderDB
+
+' 6. 処理結果を画面へ
+PurchaseProcess -> OrderScreen: 処理完了
+deactivate PurchaseProcess
+activate OrderScreen
+
+OrderScreen -> User: 注文完了画面表示
+deactivate OrderScreen
+
+' --- エラー発生時の処理 (Alt/Elseブロックで表現可能だが、シンプルにフローとして追加) ---
+alt エラー発生時 (例: 決済失敗, 残高不足)
+    PurchaseProcess -> ErrorHandler: エラー発生
+    activate ErrorHandler
+    ErrorHandler --> OrderScreen: エラー情報
+    deactivate ErrorHandler
+    OrderScreen -> User: 再度操作を促す
+end
+
+@enduml

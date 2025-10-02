@@ -1,25 +1,35 @@
 @startuml 
 left to right direction
 actor ユーザー as U1
-actor 管理者 as Admin
-actor カード会社 as CardCom
+actor システム管理者 as Admin
+actor 注文管理者 as Admin2
+actor CS as Admin3
+actor 倉庫担当者 as Admin4
 
 rectangle ユーザー {
-  usecase "登録する" as UC1
-  usecase "参照する" as UC2
-  usecase "更新する" as UC3
-  usecase "削除する" as UC4
-  usecase "支払い情報を登録する" as UC5
-  usecase "支払い情報を更新する" as UC6
-}
-
-rectangle カート {
-  usecase "商品を追加する" as UC7
-  usecase "商品を削除する" as UC8
+  usecase "アカウント登録する" as UC1
+  usecase "アカウント参照する" as UC2
+  usecase "アカウント更新する" as UC3
+  usecase "アカウント削除する" as UC4
+  usecase "ログイン" as UC5
+  usecase "ログアウト" as UC6
+  usecase "カートに商品を追加する" as UC7
+  usecase "カートの商品を削除する" as UC8
   usecase "数量を変更する" as UC9
   usecase "カートを参照する" as UC10
-  usecase "小計を計算する" as UC11
-} 
+  usecase "カートを更新する" as UC11
+  usecase "小計を計算する" as UC12
+  usecase "決済履歴を参照する" as UC13
+  usecase "商品情報を参照する" as UC14
+  usecase "注文を作成する" as UC15
+  usecase "注文を参照する" as UC16
+  usecase "注文を更新する" as UC17
+  usecase "注文をキャンセルする" as UC18
+  usecase "注文詳細を参照する" as UC20
+  usecase "発送情報を参照する" as UC21
+  usecase "配送状況を参照する" as UC22
+  usecase "返品を申請する" as UC23
+}
 
 U1 --> UC1
 U1 --> UC2
@@ -32,121 +42,68 @@ U1 --> UC8
 U1 --> UC9
 U1 --> UC10
 U1 --> UC11
-
-rectangle 管理システム {
- usecase "管理者情報を参照する" as UC17
- usecase "管理者情報を更新する" as UC18
- usecase "管理履歴を参照する" as UC19
- usecase "決済履歴を参照する" as UC20
- usecase "決済履歴を登録する" as UC21
- usecase "決済履歴を更新する" as UC22
-}
-
-Admin --> UC17
-Admin --> UC18
-Admin --> UC19
-Admin --> UC20
-Admin --> UC21
-Admin --> UC22
-
-
-
-rectangle 共通システム_商品 {
-    usecase "商品情報を参照する" as UC23
-    usecase "商品情報を登録する" as UC24
-    usecase "商品情報を更新する" as UC25
-    usecase "商品情報を削除する" as UC26
-    usecase "在庫を更新する" as UC27
-}
-
+U1 --> UC12
+U1 --> UC13
+U1 --> UC14
+U1 --> UC15
+U1 --> UC16
+U1 --> UC17
+U1 --> UC18
+U1 --> UC20
+U1 --> UC21
+U1 --> UC22
 U1 --> UC23
 
-Admin --> UC23
-Admin --> UC24
+rectangle システム {
+    usecase "アカウント登録する" as UC25
+    usecase "アカウント参照する" as UC26
+    usecase "アカウント更新する" as UC27
+    usecase "アカウント停止する" as UC28
+
+    usecase "決済履歴を参照する" as UC29
+    usecase "商品情報を参照する" as UC30
+    usecase "商品情報を登録する" as UC31
+    usecase "商品情報を更新する" as UC32
+    usecase "商品情報を削除する" as UC33
+    usecase "在庫を更新する" as UC34
+    usecase "注文詳細を参照する" as UC35
+    usecase "注文詳細を更新する" as UC36
+    
+    usecase "返金状況を更新する" as UC38
+    usecase "返金を承認する" as UC39
+    usecase "返品状況を更新する" as UC41
+
+    usecase "出荷情報を登録" as UC47
+    usecase "出荷情報を参照する" as UC37
+    usecase "出荷情報を更新" as UC44
+    usecase "出荷対象を選択" as UC45
+    usecase "発送依頼を送信する" as UC42
+}
+
 Admin --> UC25
 Admin --> UC26
 Admin --> UC27
+Admin --> UC28
 
-rectangle 共通システム_注文 {
-    usecase "注文を作成する" as UC28
-    usecase "注文を参照する" as UC29
-    usecase "注文を更新する" as UC30
-    usecase "注文をキャンセルする" as UC31
-}
+Admin2 --> UC29
+Admin2 --> UC30
+Admin2 --> UC31
+Admin2 --> UC32
+Admin2 --> UC33
+Admin2 --> UC34
+Admin2 --> UC35
+Admin2 --> UC36
 
-U1 --> UC28
-U1 --> UC29
-U1 --> UC30
-U1 --> UC31
+Admin3 --> UC38
+Admin3 --> UC39
+Admin3 --> UC41
+Admin3 --> UC35
+Admin3 --> UC36
 
-Admin --> UC29
-
-rectangle 共通システム_注文詳細 {
-    usecase "注文詳細を参照する" as UC36
-    usecase "注文詳細を登録する" as UC37
-    usecase "注文詳細を更新する" as UC38
-}
-
-U1 --> UC36
-
-Admin --> UC36
-Admin --> UC37
-Admin --> UC38
-
-rectangle 共通システム_発送 {
-    usecase "発送情報を登録する" as UC39
-    usecase "発送情報を参照する" as UC40
-    usecase "発送状況を更新する" as UC41
-}
-
-U1 --> UC40
-
-Admin --> UC39
-Admin --> UC40
-Admin --> UC41
-
-rectangle 共通システム_配送業者 {
-    usecase "配送状況を参照する" as UC42
-    usecase "配送予定を登録する" as UC43
-    usecase "配送予定を更新する" as UC44
-}
-
-U1 --> UC42
-
-Admin --> UC42
-Admin --> UC43
-Admin --> UC44
-
-rectangle 共通システム_返品 {
-    usecase "返品を申請する" as UC45
-    usecase "返品状況を更新する" as UC46
-    usecase "返品理由を登録する" as UC47
-    usecase "返品を承認する" as UC48
-    usecase "返品を却下する" as UC49
-}
-
-U1 --> UC45
-U1 --> UC47
-
-Admin --> UC46
-Admin --> UC48
-Admin --> UC49
-
-
-
-rectangle 共通システム_返金 {
-    usecase "返金を申請する" as UC50
-    usecase "返金状況を更新する" as UC51
-    usecase "返金を承認する" as UC52
-    usecase "返金を実行する" as UC53
-    usecase "返金方法を指定する" as UC54
-}
-
-Admin --> UC50
-Admin --> UC51
-Admin --> UC54
-
-CardCom --> UC52
-CardCom --> UC53
+Admin4 --> UC37
+Admin4 --> UC42
+Admin4 --> UC44
+Admin4 --> UC45
+Admin4 --> UC47
 
 @enduml
