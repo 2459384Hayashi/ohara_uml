@@ -1,0 +1,59 @@
+@startuml カート追加処理_ロバストネス図
+skinparam actorBorderColor #000000
+skinparam boundaryBackgroundColor #DAE8FC
+skinparam controlBackgroundColor #F8CECC
+skinparam entityBackgroundColor #D5E8D4
+
+' アクター定義
+actor ユーザー as User
+
+' 境界オブジェクト (Boundary) 定義
+boundary カート画面 as CartScreen
+boundary エラーメッセージ画面 as ErrorScreen
+
+' 制御オブジェクト (Control) 定義
+control カート制御 as CartControl
+
+' 実体オブジェクト (Entity) 定義
+entity 商品情報 as ProductEntity
+entity カート情報 as CartEntity
+
+' --- 基本フロー ---
+
+' 1. ユーザーは数量を選択し、2. 「カートに追加」をクリック
+User -> CartScreen: 数量選択/追加クリック
+activate CartScreen
+CartScreen -> CartControl: カート追加要求(商品ID, 数量)
+activate CartControl
+
+' 3. システムは商品DBを参照し、在庫と価格を再確認
+CartControl -> ProductEntity: 在庫・価格確認()
+activate ProductEntity
+ProductEntity --> CartControl: 商品データ
+deactivate ProductEntity
+
+' 4. システムは商品をカートに追加し、カートDBにカート情報を登録する (新規/既存)
+' -> (代替フロー4aへ分岐するロジックはCartControl内部で処理)
+CartControl -> CartEntity: カート情報登録/更新()
+activate CartEntity
+CartEntity --> CartControl: 登録完了
+deactivate CartEntity
+
+' 5. システムは更新されたカート情報を表示
+CartControl --> CartScreen: 更新カート情報とメッセージ
+deactivate CartControl
+CartScreen -> User: カート内容一覧を表示
+deactivate CartScreen
+
+' --- 代替フロー 3a (在庫不足や価格変更のエラー) ---
+' (基本フロー 3 の後の分岐)
+CartControl -[#red]-> ErrorScreen: エラーメッセージを表示
+activate ErrorScreen
+ErrorScreen -[#red]-> User: 「カートに追加できませんでした」を表示
+deactivate ErrorScreen
+
+' --- 代替フロー 4a (既存のカートへの追加) ---
+' (基本フロー 4 の処理ロジック内で処理が分岐)
+' ※代替フロー4aは既存カートを更新する処理であり、基本フローのCartEntityへの登録/更新処理に含まれるため、ここでは独立したメッセージとしては記述せず、Control内のロジックとして表現する。
+
+@enduml

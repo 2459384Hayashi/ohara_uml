@@ -1,4 +1,4 @@
-@startuml 倉庫・出荷管理システム_統合シーケンス図_V2
+@startuml 倉庫・出荷管理システム_統合シーケンス図_V2_メソッド修正
 hide footbox
 ' スタイル設定
 skinparam boundaryBackgroundColor #D5E8D4
@@ -19,9 +19,9 @@ entity 配送システム as DeliverySystem
 ' 1. 倉庫担当者が一覧画面を操作し、データ取得
 Staff -> ListScreen: 出荷指示管理一覧を表示
 activate ListScreen
-ListScreen -> Control: 指示データ取得要求
+ListScreen -> Control: 指示データ取得要求()
 activate Control
-Control -> SiDB: 全指示データ要求
+Control -> SiDB: 全指示データ要求()
 activate SiDB
 SiDB --> Control: 指示データ一覧
 deactivate SiDB
@@ -31,48 +31,47 @@ deactivate Control
 ' 2. 倉庫担当者の操作分岐
 alt 出荷対象の選択と配送依頼 (詳細情報要求を追加)
     Staff -> ListScreen: **出荷対象を選択 (ID指定)**
-    ListScreen -> Control: **詳細データ要求 (ID)**
+    ListScreen -> Control: **詳細データ要求(ID)**
     activate Control
 
-    ' 【追加・修正箇所】詳細データの取得
-    Control -> SiDB: **対象IDの指示詳細データを取得**
+'【追加・修正箇所】詳細データの取得
+    Control -> SiDB: **対象IDの指示詳細データを取得()**
     activate SiDB
     SiDB --> Control: **指示詳細データ**
     deactivate SiDB
 
-    ' DFDのメッセージ「出荷対象の選択要求」に相当する処理
-    Control -> DetailScreen: 出荷指示詳細画面を表示する
+' DFDのメッセージ「出荷対象の選択要求」に相当する処理
+    Control -> DetailScreen: 出荷指示詳細画面を表示
     activate DetailScreen
     DetailScreen -> Staff: **詳細データ表示**
     
-    ' DFDのメッセージ「配送依頼を送信」に相当する処理
-    Control -> DeliverySystem: 配送依頼を送信
+  ' DFDのメッセージ「配送依頼を送信」に相当する処理
+    Control -> DeliverySystem: 配送依頼を送信()
     activate DeliverySystem
-    DeliverySystem --> Control: 配送依頼受付完了メッセージを送信
+    DeliverySystem --> Control: 配送依頼受付完了メッセージ
     deactivate DeliverySystem
-    
-    Control --> ListScreen: 選択完了通知
+      Control --> ListScreen: 選択完了通知
     deactivate Control
     ListScreen -> Staff: 一覧表示を更新 (または詳細画面へ遷移)
     
 else ピッキング完了の登録 (DFD中央下部フロー)
     Staff -> DetailScreen: ピッキング完了ボタン押下
     activate DetailScreen
-    DetailScreen -> Control: ピッキング完了の登録
+    DetailScreen -> Control: ピッキング完了の登録()
     activate Control
     
-    ' データベースの更新
-    Control -> StatusDB: 出荷準備ステータスを完了に更新
+'データベースの更      
+    Control -> StatusDB: 出荷準備ステータスを完了に更新()
     activate StatusDB
     StatusDB --> Control: 更新完了
     deactivate StatusDB
     
-    Control -> PickingDB: 完了登録データ送信
+    Control -> PickingDB: 完了登録データ送信()
     activate PickingDB
     PickingDB --> Control: 登録完了
     deactivate PickingDB
     
-    ' 完了メッセージの表示
+'完了メッセージの表示
     Control -> MessageScreen: 出荷準備完了メッセージを表示
     activate MessageScreen
     MessageScreen --> Control: 表示通知
@@ -85,7 +84,7 @@ else ピッキング完了の登録 (DFD中央下部フロー)
 else 該当指示なしのエラー表示 (DFD中央下部エラーフロー)
     Staff -> DetailScreen: (存在しない)出荷指示の詳細要求
     activate DetailScreen
-    DetailScreen -> Control: 指示データ確認要求
+    DetailScreen -> Control: 指示データ確認要求()
     activate Control
     
     Note over Control: DB検索の結果、指示データなし
@@ -102,4 +101,4 @@ end
 deactivate DetailScreen
 deactivate ListScreen
 
-@enduml
+@end   

@@ -1,0 +1,53 @@
+@startuml Order Management System - Purchase/Order Sequence Diagram
+hide footbox
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor #F8CECC
+skinparam entityBackgroundColor #DAE8FC
+
+actor User as User
+boundary Order.jsp as OrderScreen
+control PurchaseProcess.jsp as PurchaseProcess
+control ErrorHandler.jsp as ErrorHandler 
+entity OrderDB.java as OrderDB
+entity InventoryDB.java as InventoryDB
+entity CreditCardSystem as CreditCardSystem 
+
+User -> OrderScreen: 注文データ入力/確認
+activate OrderScreen
+
+OrderScreen -> PurchaseProcess: 注文を送信()
+deactivate OrderScreen
+activate PurchaseProcess
+
+User -> PurchaseProcess: クレカ情報を入力()
+
+PurchaseProcess -> CreditCardSystem: APIリクエスト(決済情報)()
+activate CreditCardSystem
+CreditCardSystem --> PurchaseProcess: 決済成功/確認応答
+deactivate CreditCardSystem
+
+PurchaseProcess -> InventoryDB: 在庫更新()
+activate InventoryDB
+InventoryDB --> PurchaseProcess: 更新完了
+deactivate InventoryDB
+
+PurchaseProcess -> OrderDB:注文データ登録()
+activate OrderDB
+OrderDB --> PurchaseProcess: 登録完了
+deactivate OrderDB
+
+PurchaseProcess -> OrderScreen: 処理完了
+deactivate PurchaseProcess
+activate OrderScreen
+
+OrderScreen -> User: 注文完了画面表示
+deactivate OrderScreen
+
+alt エラー発生時 (例: 決済失敗, 上限に達している場合)
+    PurchaseProcess -> CreditCardSystem: エラー発生()
+    activate CreditCardSystem
+    CreditCardSystem --> OrderScreen: エラー表示()
+    deactivate CreditCardSystem
+    OrderScreen -> User: 再度操作を促す
+end
+@enduml
