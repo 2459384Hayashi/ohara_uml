@@ -1,0 +1,112 @@
+@startuml
+hide footbox
+
+' ★色設定
+skinparam boundary {
+    BackgroundColor #D5E8D4
+}
+skinparam entity {
+    BackgroundColor #DAE8FC
+}
+skinparam control {
+    BackgroundColor #F8CECC
+}
+
+title 履歴閲覧シーケンス図
+
+' オブジェクト定義
+actor "事務職員" as Staff
+boundary "メニュー画面" as MenuScreen
+boundary "貸出履歴検索画面" as SearchScreen
+boundary "図書一覧画面" as BookListScreen
+boundary "貸出履歴一覧画面" as HistoryListScreen
+
+control "貸出履歴検索画面表示" as ScreenDisplayControl
+control "検索" as SearchControl
+control "貸出履歴一覧画面表示" as HistoryControl
+control "エラー処理" as ErrorControl
+
+entity "図書DB" as BookDB
+entity "貸出履歴DB" as LogDB
+
+' =================================================================
+' --- ユースケース 1: 貸出履歴検索 ---
+' =================================================================
+
+' 1. 画面遷移 (Control経由)
+Staff -> MenuScreen : ① 押下(貸出履歴検索)
+activate MenuScreen
+MenuScreen -> ScreenDisplayControl : 画面表示要求(検索画面)
+activate ScreenDisplayControl
+ScreenDisplayControl --> SearchScreen : 画面表示
+deactivate ScreenDisplayControl
+deactivate MenuScreen
+
+' 2. 検索処理
+Staff -> SearchScreen : ② 書名を入力し検索をクリック
+activate SearchScreen
+
+alt 書名が未入力の場合（代替フロー：書名未入力）
+    SearchScreen -> ErrorControl : エラーチェック(書名未入力)
+    activate ErrorControl
+    ErrorControl --> SearchScreen : メッセージレスポンス("書名を入力してください")
+    deactivate ErrorControl
+    SearchScreen -> Staff : メッセージを表示
+
+else 書名が入力されている場合 (基本フロー/代替フロー: 図書無し)
+    SearchScreen -> SearchControl : 検索要求(書名)
+    activate SearchControl
+    SearchControl -> BookDB : 情報取得(書名)
+    activate BookDB
+    BookDB --> SearchControl : 結果を返す
+    deactivate BookDB
+
+    alt 該当する図書が無い場合（代替フロー：図書無し）
+        SearchControl -> ErrorControl : エラー処理要求(該当図書無し)
+        deactivate SearchControl
+        activate ErrorControl
+        ErrorControl --> SearchScreen : メッセージレスポンス("該当する図書がありません")
+        deactivate ErrorControl
+        SearchScreen -> Staff : メッセージを表示
+
+    else 該当図書が存在する場合（基本フロー）
+        SearchControl --> SearchScreen : 結果を表示
+        deactivate SearchControl
+        SearchScreen -> Staff : 貸出履歴表示
+    end
+end
+deactivate SearchScreen
+
+' =================================================================
+' --- ユースケース 2: 図書一覧からの貸出履歴表示 ---
+' =================================================================
+
+' 1. 履歴表示処理
+Staff -> BookListScreen : ③ 管理番号をクリック
+activate BookListScreen
+BookListScreen -> HistoryControl : 履歴表示要求(管理番号)
+activate HistoryControl
+
+HistoryControl -> LogDB : 情報取得(管理番号)
+activate LogDB
+LogDB --> HistoryControl : 結果を返す
+deactivate LogDB
+
+alt 貸出履歴件数が0の場合（代替フロー：履歴なし）
+    HistoryControl -> ErrorControl : エラー処理要求(履歴件数0)
+    deactivate HistoryControl
+    activate ErrorControl
+    ErrorControl --> HistoryListScreen : メッセージレスポンス("貸出履歴がありません")
+    deactivate ErrorControl
+    activate HistoryListScreen
+    HistoryListScreen -> Staff : メッセージを表示
+    deactivate HistoryListScreen
+else 貸出履歴が存在する場合（基本フロー）
+    HistoryControl -> HistoryListScreen : 表示
+    deactivate HistoryControl
+    activate HistoryListScreen
+    HistoryListScreen -> Staff : 貸出履歴一覧表示
+    deactivate HistoryListScreen
+end
+deactivate BookListScreen
+@enduml
