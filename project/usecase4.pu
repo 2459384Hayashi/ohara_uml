@@ -1,0 +1,30 @@
+@startuml PachinkoWinLogユースケース図
+left to right direction
+
+' アクターの定義 (Actors)
+actor "パチンコを打つ人 (遊技者)" as Player
+actor "広告主" as Advertiser
+
+' システム境界の定義 (System Boundary)
+rectangle PachinkoWinLog {
+    usecase "遊技記録の新規入力" as UC100
+    usecase "台ごとの勝率/収支を集計する" as UC200
+    usecase "記録の閲覧・編集・削除" as UC300
+    usecase "遊技台情報の登録・管理" as UC400
+    usecase "データに基づいた台の選定支援" as UC500
+    usecase "広告の表示と管理" as UC600
+}
+
+' 関係性の定義 (Associations)
+
+' 遊技者の操作
+Player --> UC100
+Player --> UC200
+Player --> UC300
+Player --> UC400
+Player --> UC500
+
+' 広告主の操作
+Advertiser --> UC600
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml LocalCompass_拡張版ユースケース図
+left to right direction
+
+actor ユーザー as User
+actor 外国人ユーザー as ForeignUser
+actor 広告ユーザー as Advertiser
+
+rectangle LocalCompass {
+    usecase "現在地と周辺情報の確認" as UC100
+    usecase "キーワード/カテゴリ検索" as UC200
+    usecase "「行ってみたい」場所の発見" as UC300
+    usecase "多言語での情報閲覧" as UC400
+    usecase "ルート案内とナビゲーション" as UC600
+    usecase "店舗・イベント情報の登録/編集" as UC500
+    usecase "リアルタイム混雑状況の確認" as UC700
+    usecase "パーソナライズされた今のおすすめ" as UC800
+}
+
+User --> UC100
+User --> UC200
+User --> UC300
+User --> UC600
+User --> UC700
+User --> UC800 
+
+ForeignUser --> UC400
+ForeignUser .> UC300 : <<use>>
+ForeignUser .> UC600 : <<use>>
+ForeignUser .> UC700 : <<use>>
+
+Advertiser --> UC500
+@enduml

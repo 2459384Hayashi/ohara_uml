@@ -1,0 +1,49 @@
+@startuml GameStrategyHub_拡張版ユースケース図
+left to right direction
+
+actor "利用者" as US
+actor "管理者" as Admin
+actor "広告主" as Advertiser
+
+rectangle User {
+    usecase "ログイン" as US1
+    usecase "ログアウト" as US2
+    usecase "攻略情報の新規投稿" as US3
+    usecase "攻略情報の検索" as US4
+    usecase "攻略情報の閲覧" as US5
+    usecase "投稿へのフィードバック (Comment/Like)" as US6
+    usecase "ユーザー/コンテンツのフォロー" as US7
+    usecase "投稿の編集" as US8
+    usecase "投稿の削除" as US9
+    'usecase "質問と回答 (Q&A) 機能の利用" as US10
+}
+
+rectangle System {
+    usecase "アカウント登録" as US11
+    usecase "アカウント参照" as US12
+    usecase "アカウント更新" as US13
+    usecase "アカウント削除" as US14
+    usecase "投稿の閲覧" as US15
+    usecase "投稿の削除" as US16
+    usecase "広告枠の掲載管理" as US17
+}
+
+US --> US1
+US --> US2
+US --> US3
+US --> US4
+US --> US5
+US --> US6
+US --> US7
+US --> US8
+US --> US9
+'US --> US10
+
+Admin --> US11
+Admin --> US12
+Admin --> US13
+Admin --> US14
+Admin --> US15
+Admin --> US16
+
+Advertiser --> US17

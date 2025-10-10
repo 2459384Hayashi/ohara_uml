@@ -1,0 +1,41 @@
+@startuml CampusRecordProユースケース図
+left to right direction
+
+' アクターの定義 (Actors)
+actor 生徒 as Student
+actor 教職員 as Staff
+actor 管理者 as Admin
+actor 保護者 as Guardian
+
+' システム境界の定義 (System Boundary)
+rectangle CampusRecordPro {
+    usecase "登校/下校時刻を打刻する" as UC100
+    usecase "評価免除申請を提出する" as UC200
+    usecase "申請を審査・承認する" as UC300
+    usecase "自分の評価履歴を確認する" as UC400
+    usecase "生徒の出欠・記録を参照する" as UC500
+    usecase "罰則を適用・記録する" as UC600
+    usecase "学校全体の傾向を分析する" as UC700
+}
+
+' 関係性の定義 (Associations)
+
+' 生徒の操作
+Student --> UC100
+Student --> UC200
+Student --> UC400
+
+' 教職員の操作
+Staff --> UC300
+Staff --> UC500
+Staff --> UC600
+
+' 管理者の操作
+Admin --> UC700
+Admin --> UC500
+
+' 保護者の操作 (参照に限定)
+Guardian --> UC400
+Guardian --> UC500
+
+@enduml
